@@ -59,7 +59,7 @@ body{
   z-index:-1;
 }
 
-/* canvas for cursor */
+/* canvas for tiny spark trail */
 #sparkleCanvas{
   position:fixed;
   inset:0;
@@ -99,30 +99,25 @@ body{
   border:1px solid var(--line);
   position:relative;
   overflow:visible;
-  z-index: 10;
+  z-index:10;
 
   background:
     radial-gradient(circle at 30% 30%, rgba(255,255,255,.85), transparent 55%),
     url("./icon.jpg") center/cover no-repeat;
 }
 
-/* BIGGER, cleaner orbit ring */
+/* orbit ring */
 .pfp .ring{
   position:absolute;
   left:50%;
   top:50%;
-
-  /* bigger than before so it sits nicely around the head */
-  width: 200px;
-  height: auto;
-
+  width:200px;
+  height:auto;
   transform: translate(-50%,-50%) rotate(-18deg);
   pointer-events:none;
-
-  z-index: 9999;
+  z-index:9999;
   filter: drop-shadow(0 0 14px rgba(200,221,245,.45));
 }
-
 
 h1{margin:0;font-size:44px;line-height:1;color:var(--cosmic-ink);}
 
@@ -232,91 +227,94 @@ textarea{min-height:120px;}
 </video>
 <div id="bgOverlay"></div>
 
+<!-- tiny 4-spark trail canvas -->
+<canvas id="sparkleCanvas"></canvas>
 
 <div class="wrap">
-<div class="card">
+  <div class="card">
 
-<header class="header">
-  <div class="pfp">
-  <img class="ring" src="./ring.png" alt="" />
-</div>
-  <div>
-    <h1>Title Here</h1>
-    <p class="sub">insert subheader here • links • vibes</p>
+    <header class="header">
+      <div class="pfp">
+        <img class="ring" src="./ring.png" alt="">
+      </div>
+      <div>
+        <h1>Title Here</h1>
+        <p class="sub">insert subheader here • links • vibes</p>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab" aria-selected="true" data-tab="home">Home</button>
+      <button class="tab" aria-selected="false" data-tab="about">About</button>
+      <button class="tab" aria-selected="false" data-tab="inbox">Inbox / Q&A</button>
+    </div>
+
+    <div class="content">
+
+      <section class="panel active" id="home">
+        <div class="grid">
+          <div class="box">
+            <p>
+              <strong>Welcome!</strong><br>
+              This is my tiny corner of the internet. I write on AO3 and collect tropes like shiny rocks.
+            </p>
+
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <a class="btn" href="https://archiveofourown.org/users/YOUR_AO3_USERNAME" target="_blank">AO3</a>
+              <a class="btn" href="https://archiveofourown.org/users/YOUR_AO3_USERNAME/works" target="_blank">Works</a>
+            </div>
+          </div>
+
+          <aside class="box">
+            <div class="art">
+              <img src="./cat.png" alt="cat panel">
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="panel" id="about">
+        <div class="grid">
+          <div class="box">
+            <p>
+              <strong>About me</strong><br>
+              Name: Cat<br>
+              Writes: your genres here<br>
+              Loves: your things here
+            </p>
+          </div>
+
+          <aside class="box">
+            <div class="art">
+              <img src="./cat.png" alt="cat panel">
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="panel" id="inbox">
+        <div class="box">
+          <p><strong>Inbox / Q&A</strong><br>
+          Send a message — anonymous is fine.</p>
+
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="hp"><input name="website"></div>
+            <input name="name" placeholder="Name (optional)">
+            <textarea name="message" placeholder="Write your message..."></textarea>
+            <button class="btn" type="submit">Send</button>
+          </form>
+        </div>
+      </section>
+
+    </div>
   </div>
-</header>
-
-<div class="tabs">
-  <button class="tab" aria-selected="true" data-tab="home">Home</button>
-  <button class="tab" aria-selected="false" data-tab="about">About</button>
-  <button class="tab" aria-selected="false" data-tab="inbox">Inbox / Q&A</button>
-</div>
-
-<div class="content">
-
-<section class="panel active" id="home">
-<div class="grid">
-<div class="box">
-<p>
-<strong>Welcome!</strong><br>
-This is my tiny corner of the internet. I write on AO3 and collect tropes like shiny rocks.
-</p>
-
-<div style="display:flex;gap:8px;flex-wrap:wrap;">
-<a class="btn" href="https://archiveofourown.org/users/YOUR_AO3_USERNAME" target="_blank">AO3</a>
-<a class="btn" href="https://archiveofourown.org/users/YOUR_AO3_USERNAME/works" target="_blank">Works</a>
-</div>
-</div>
-
-<aside class="box">
-  <div class="art">
-    <img src="./cat.png" alt="cat panel"/>
-  </div>
-</aside>
-</div>
-</section>
-
-<section class="panel" id="about">
-<div class="grid">
-<div class="box">
-<p>
-<strong>About me</strong><br>
-Name: Cat<br>
-Writes: your genres here<br>
-Loves: your things here
-</p>
-</div>
-
-<aside class="box">
-<div class="art">
-  <img src="./cat.png" alt="cat panel"/>
-</div>
-</aside>
-</div>
-</section>
-
-<section class="panel" id="inbox">
-<div class="box">
-<p><strong>Inbox / Q&A</strong><br>
-Send a message — anonymous is fine.</p>
-
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-<div class="hp"><input name="website"/></div>
-<input name="name" placeholder="Name (optional)"/>
-<textarea name="message" placeholder="Write your message..."></textarea>
-<button class="btn" type="submit">Send</button>
-</form>
-</div>
-</section>
-
-</div>
-</div>
 </div>
 
 <script>
 // ---- TABS ----
-const tabs=document.querySelectorAll(".tab");
-const panels=document.querySelectorAll(".panel");
+const tabs = document.querySelectorAll(".tab");
+const panels = document.querySelectorAll(".panel");
+
 tabs.forEach(b=>{
   b.onclick=()=>{
     tabs.forEach(t=>t.setAttribute("aria-selected","false"));
@@ -326,20 +324,59 @@ tabs.forEach(b=>{
   }
 });
 
+// ---- TINY 4-SPARK TRAIL (default cursor stays) ----
+const c = document.getElementById("sparkleCanvas");
+const ctx = c.getContext("2d");
+
+function resize(){
+  c.width = innerWidth;
+  c.height = innerHeight;
+}
+addEventListener("resize", resize);
+resize();
+
+let mx = 0, my = 0;
+addEventListener("mousemove", (e)=>{
+  mx = e.clientX;
+  my = e.clientY;
+});
+
+const sparks = [];
+
+function spawnSpark(){
+  // only keep 4 sparks max
+  if(sparks.length < 4){
+    sparks.push({ x: mx, y: my, life: 0 });
+  }
+}
+
+function tick(){
+  ctx.clearRect(0,0,c.width,c.height);
+
+  // spawn gently (normal speed)
+  if(Math.random() < 0.30){
+    spawnSpark();
+  }
+
+  for(let i=sparks.length-1;i>=0;i--){
+    const s = sparks[i];
+    s.life++;
+
+    const a = 1 - (s.life/55);     // fade
+    const r = 0.8 + (s.life/18);   // size growth
+
+    ctx.fillStyle = `rgba(200,221,245,${Math.max(0,a)})`; // --cloud
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, r, 0, Math.PI*2);
+    ctx.fill();
+
+    if(s.life > 55) sparks.splice(i,1);
+  }
+
+  requestAnimationFrame(tick);
+}
+tick();
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
