@@ -324,7 +324,7 @@ tabs.forEach(b=>{
   }
 });
 
-// ---- TINY 4-SPARK TRAIL (more visible) ----
+// ---- ALWAYS-4 SPARK TRAIL (never stops) ----
 const c = document.getElementById("sparkleCanvas");
 const ctx = c.getContext("2d", { alpha: true });
 
@@ -340,50 +340,59 @@ addEventListener("resize", resize);
 resize();
 
 let mx = innerWidth/2, my = innerHeight/2;
-let moved = false;
+let lastSpawn = 0;
+
+// exactly 4 sparks, recycle the oldest
+const sparks = [];
+const MAX = 4;
 
 addEventListener("mousemove", (e)=>{
   mx = e.clientX;
   my = e.clientY;
-  moved = true;
-  spawn(); // spawn immediately so you SEE it
+
+  const now = performance.now();
+  if(now - lastSpawn > 30){ // normal speed (lower = more)
+    spawn(mx, my);
+    lastSpawn = now;
+  }
 });
 
-const sparks = []; // max 4
-
-function spawn(){
-  if(sparks.length >= 4) return;
-  sparks.push({
-    x: mx, y: my,
+function spawn(x,y){
+  const s = {
+    x, y,
     life: 0,
-    ttl: 70,
-    r: 2.2
-  });
+    ttl: 80
+  };
+
+  if(sparks.length < MAX) sparks.push(s);
+  else {
+    // replace oldest spark (index 0)
+    sparks.shift();
+    sparks.push(s);
+  }
 }
 
 function tick(){
   ctx.clearRect(0,0,innerWidth,innerHeight);
 
-  // keep a gentle trail while moving
-  if(moved && Math.random() < 0.35) spawn();
-
-  // glow blend (helps visibility on video)
   ctx.globalCompositeOperation = "lighter";
 
-  for(let i = sparks.length-1; i >= 0; i--){
+  for(let i=0;i<sparks.length;i++){
     const s = sparks[i];
     s.life++;
 
     const a = Math.max(0, 1 - s.life/s.ttl);
-    const r = s.r + s.life/30;
+    const r = 1.8 + (s.life/35);
 
-    // brighter, still “cloud” colored
-    ctx.fillStyle = `rgba(200,221,245,${a * 0.95})`;
+    ctx.fillStyle = `rgba(200,221,245,${a * 0.9})`;
     ctx.beginPath();
     ctx.arc(s.x, s.y, r, 0, Math.PI*2);
     ctx.fill();
+  }
 
-    if(s.life >= s.ttl) sparks.splice(i,1);
+  // remove dead sparks (extra safety)
+  for(let i=sparks.length-1;i>=0;i--){
+    if(sparks[i].life >= sparks[i].ttl) sparks.splice(i,1);
   }
 
   ctx.globalCompositeOperation = "source-over";
@@ -394,4 +403,5 @@ tick();
 
 </body>
 </html>
+
 
