@@ -214,6 +214,49 @@ input,textarea{
 }
 textarea{min-height:120px;}
 .hp{display:none;}
+
+  /* LETTER POPUP */
+.letterOverlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  place-items:center;
+  background:rgba(11,24,56,.35);
+  backdrop-filter:blur(4px);
+  z-index:5000;
+}
+
+.letterOverlay.open{display:grid;}
+
+.letterCard{
+  width:min(520px,92vw);
+  border-radius:18px;
+  background:rgba(200,221,245,.96);
+  border:1px solid rgba(11,24,56,.18);
+  box-shadow:0 24px 70px rgba(11,24,56,.35);
+  padding:18px;
+  position:relative;
+}
+
+.letterClose{
+  position:absolute;
+  top:10px; right:10px;
+}
+
+/* FLOATING HEARTS */
+.heart{
+  position:fixed;
+  pointer-events:none;
+  font-size:16px;
+  animation:floatHeart 900ms ease-out forwards;
+}
+
+@keyframes floatHeart{
+  0%   {opacity:0; transform:translate(-50%,-50%) translateY(0) scale(.9);}
+  20%  {opacity:1;}
+  100% {opacity:0; transform:translate(-50%,-50%) translateY(-70px) scale(1.15);}
+}
+
 </style>
 </head>
 
@@ -224,7 +267,7 @@ textarea{min-height:120px;}
 </video>
 <div id="bgOverlay"></div>
 
-<!-- tiny 4-spark trail canvas -->
+<! --spark trail canvas -->
 <canvas id="sparkleCanvas"></canvas>
 
 <div class="wrap">
@@ -269,15 +312,38 @@ textarea{min-height:120px;}
             <p>
               Make a space for yourself to breathe and let the stars in you talk to other star versions of themselves, that is, you.
             </p>
-            
-            
-            
+            <!-- CLICKABLE LETTER -->
+<div style="margin-top:16px; text-align:center;">
+  <button class="btn" id="openLetter">💌 Open Letter</button>
+</div>
 
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-             <a class="btn" href="https://archiveofourown.org/users/cathasbigheart/profile" target="_blank" rel="noopener">AO3</a>
-             <a class="btn" href="https://x.com/cathasbigheart" target="_blank" rel="noopener">Twitter</a>
-             <a class="btn" href="https://open.spotify.com/user/31zskhjn5dgq5m3krcxmglsa3pxy?si=77630d72766b494a" target="_blank" rel="noopener">Spotify</a>
-            </div>
+<!-- LETTER POPUP -->
+<div class="letterOverlay" id="letterOverlay">
+  <div class="letterCard">
+    <button class="btn letterClose" id="closeLetter">×</button>
+
+    <div class="letterTitle">A little note</div>
+
+    <div class="letterText">
+      <p>
+      Dear visitor,
+      </p>
+
+      <p>
+      If you’re reading this, you’ve wandered into my tiny orbit on the internet.
+      I write stories, collect beautiful things, and look at the sky too much.
+      </p>
+
+      <p>
+      Thank you for stopping by. 🌙
+      </p>
+    </div>
+  </div>
+</div>
+
+            
+            
+            
           </div>
 
           <aside class="box">
@@ -297,6 +363,11 @@ textarea{min-height:120px;}
               Writes: your genres here<br>
               Loves: your things here
             </p>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+             <a class="btn" href="https://archiveofourown.org/users/cathasbigheart/profile" target="_blank" rel="noopener">AO3</a>
+             <a class="btn" href="https://x.com/cathasbigheart" target="_blank" rel="noopener">Twitter</a>
+             <a class="btn" href="https://open.spotify.com/user/31zskhjn5dgq5m3krcxmglsa3pxy?si=77630d72766b494a" target="_blank" rel="noopener">Spotify</a>
           </div>
 
           <aside class="box">
@@ -417,6 +488,7 @@ tick();
 
 </body>
 </html>
+
 
 
 
