@@ -316,7 +316,7 @@ h1{margin:0;font-size:44px;line-height:1;color:var(--cosmic-ink);}
 
     <div class="content">
 
-      <!-- HOME -->
+      <!-- home -->
       <section class="panel active" id="home">
         <div class="grid">
           <div class="box">
@@ -381,9 +381,9 @@ h1{margin:0;font-size:44px;line-height:1;color:var(--cosmic-ink);}
       <section class="panel" id="inbox">
         <div class="box">
           <p><strong>Inbox / Q&A</strong><br>
-          Send a message — anonymous is fine.</p>
+          Send a message whether it's a fic idea you want to read or just a question!</p>
 
-          <form class="formCard" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <form class="formCard" action="https://formspree.io/f/xbdalgnp" method="POST">
             <div class="hp"><input name="website"></div>
 
             <div class="formGrid">
@@ -393,7 +393,7 @@ h1{margin:0;font-size:44px;line-height:1;color:var(--cosmic-ink);}
               <textarea class="field textarea" name="message" placeholder="Write your message..." required></textarea>
             </div>
 
-            <div class="smallNote">Tip: replace <code>YOUR_FORM_ID</code> with your Formspree form id.</div>
+            <div class="smallNote">I will receieve it via email.</div>
           </form>
         </div>
       </section>
@@ -403,7 +403,7 @@ h1{margin:0;font-size:44px;line-height:1;color:var(--cosmic-ink);}
 </div>
 
 <script>
-// ---- TABS ----
+// ---- tabs ----
 const tabs = document.querySelectorAll(".tab");
 const panels = document.querySelectorAll(".panel");
 tabs.forEach(b=>{
@@ -415,7 +415,7 @@ tabs.forEach(b=>{
   }
 });
 
-// ---- 4 SPARKS TRAIL (more visible, keeps spawning) ----
+// ---- sparks trial ----
 const c = document.getElementById("sparkleCanvas");
 const ctx = c.getContext("2d", { alpha:true });
 
@@ -439,7 +439,7 @@ const MAX = 4;
 addEventListener("mousemove",(e)=>{
   mx = e.clientX; my = e.clientY;
   const now = performance.now();
-  if(now - lastSpawn > 22){ // a touch faster so it never "dies"
+  if(now - lastSpawn > 22){ // 
     spawn(mx, my);
     lastSpawn = now;
   }
@@ -461,7 +461,7 @@ function tick(){
     const a = Math.max(0, 1 - s.life/s.ttl);
     const r = 2.6 + (s.life/34);
 
-    // brighter + slightly bluer for visibility
+    // brighter slightly bluer for visibility
     ctx.fillStyle = `rgba(200,221,245,${Math.min(1, a*1.25)})`;
     ctx.beginPath();
     ctx.arc(s.x, s.y, r, 0, Math.PI*2);
@@ -477,7 +477,7 @@ function tick(){
 }
 tick();
 
-// ---- IG-STYLE HEART BURST FROM THE LETTER ----
+// ---- heart burst from the letter ----
 const letterBtn = document.getElementById("openLetter");
 
 function popHeartsFrom(el, count=6){
@@ -513,6 +513,7 @@ letterBtn?.addEventListener("click", ()=> popHeartsFrom(letterBtn, 6));
 
 </body>
 </html>
+
 
 
 
